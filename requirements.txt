@@ -1,0 +1,13 @@
+#creating vertual environment ->python -m venv venv
+#Activate -> source venv/bin/activate
+streamlit #Frontend
+dlib-bin #Python package that provides a pre-compiled version of the Dlib library,Face recognition
+git+https://github.com/ageitgey/face_recognition_models  #it is trained model on millions of images that makes face embeddings, it defines 
+setuptools<70.0.0  # it library helps in fetching to the pretrained model
+Supabase # Database + Authentication + APIs + File Storage + Backend features
+bcrypt #it secures personal information by hashing(decode in numenic code)
+segno #generate a QR code
+pillow #image preprocessing
+streamlit #Frontend
+librosa #Edit the audio
+resemblyzer #make embeddings of voice and compare
