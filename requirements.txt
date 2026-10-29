@@ -2,6 +2,7 @@
 #Activate -> source venv/bin/activate
 streamlit #Frontend
 dlib-bin #Python package that provides a pre-compiled version of the Dlib library,Face recognition
+opencv-python-headless
 git+https://github.com/ageitgey/face_recognition_models  #it is trained model on millions of images that makes face embeddings, it defines 
 setuptools<70.0.0  # it library helps in fetching to the pretrained model
 Supabase # Database + Authentication + APIs + File Storage + Backend features
