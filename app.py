@@ -4,8 +4,7 @@ import streamlit as st
 # Must run before importing modules that may use Streamlit.
 st.set_page_config(
     page_title="PresenceX - Connecting Student Presence With AI",
-    page_icon="🟣",
-    layout="wide",
+    page_icon="PresenceX.png"
 )
 
 from src.Screens.home_screen import home
