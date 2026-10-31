@@ -72,6 +72,7 @@ def teacher_dashboard():
                 ):
                     st.session_state.is_logged_in = False
                     del st.session_state.teacher_data
+                    st.session_state.pop("last_attendance_report", None)
                     st.rerun()
 
         st.write("")
@@ -138,6 +139,21 @@ def teacher_dashboard():
 
 def teacher_take_attendance():
     st.header("Take AI Attendance")
+    last_report = st.session_state.get("last_attendance_report")
+    if last_report:
+        st.caption(
+            f"Last saved session: {last_report['subject_name']} · "
+            f"{last_report['session_time']}"
+        )
+        st.download_button(
+            "Download session attendance PDF",
+            data=last_report["data"],
+            file_name=last_report["file_name"],
+            mime="application/pdf",
+            icon=":material/download:",
+            width="stretch",
+            key="download_last_attendance_pdf",
+        )
     if "attendance_image" not in st.session_state:
         st.session_state.attendance_image = []
     teacher_id = st.session_state.teacher_data["teacher_id"]
@@ -268,7 +284,11 @@ def teacher_take_attendance():
                         if not results:
                             st.warning("No enrolled student records were found.")
                             return
-                        attendance_result_dialog(pd.DataFrame(results), attendance_log)
+                        attendance_result_dialog(
+                            pd.DataFrame(results),
+                            attendance_log,
+                            subject_keys,
+                        )
         with c3:
             if st.button("Voice Attendance", width="stretch", icon=":material/mic:"):
                 st.success("Under Development")
