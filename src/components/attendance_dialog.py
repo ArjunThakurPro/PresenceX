@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import time
 from src.database.db import attendance_log_db
+from src.components.attendance_pdf import create_attendance_pdf
 
 
 def _inject_attendance_dialog_styles():
@@ -122,7 +123,7 @@ def _inject_attendance_dialog_styles():
 
 
 @st.dialog("Attendance Catalogue")
-def attendance_result_dialog(result, logs):
+def attendance_result_dialog(result, logs, subject_name):
     _inject_attendance_dialog_styles()
 
     records_count = (
@@ -162,13 +163,27 @@ def attendance_result_dialog(result, logs):
                     st.warning("No attendance logs available to save.")
                     return
 
+                pdf_data, pdf_filename = create_attendance_pdf(
+                    result,
+                    subject_name,
+                    logs[0]["timestamp"],
+                )
                 attendance_log_db(logs)
+                session_time = logs[0]["timestamp"]
+                st.session_state.last_attendance_report = {
+                    "data": pdf_data,
+                    "file_name": pdf_filename,
+                    "subject_name": subject_name,
+                    "session_time": session_time,
+                }
                 st.session_state.attendance_image = []
                 st.success("Attendance saved successfully.")
                 time.sleep(2)
                 st.rerun()
             except Exception as e:
-                st.error("Failed to save attendance. Please try again.")
+                st.error(
+                    "Failed to prepare or save attendance. Please try again."
+                )
                 st.exception(e)
 
     with col2:
