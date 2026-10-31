@@ -16,8 +16,8 @@ from src.Screens.teacher_screen import (
 )
 from src.components.auto_enrolling import subject_joining
 
-
-def main():
+try:
+  def main():
     if "login_type" not in st.session_state:
         st.session_state["login_type"] = None
 
@@ -50,6 +50,11 @@ def main():
             and st.session_state.get("user_role") == "student"
         ):
             subject_joining(join_code)
+except Exception:
+    error_details = traceback.format_exc()
+    print(error_details)
+    st.error("PresenceX encountered a startup/runtime error.")
+    st.code(error_details, language="python")
 
 
 if __name__ == "__main__":
