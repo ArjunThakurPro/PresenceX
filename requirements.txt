@@ -10,3 +10,4 @@ pillow #image preprocessing
 streamlit #Frontend
 librosa #Edit the audio
 resemblyzer #make embeddings of voice and compare
+reportlab #generate PDF attendance reports
