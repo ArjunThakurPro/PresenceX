@@ -4,8 +4,7 @@ import traceback
 
 st.set_page_config(
     page_title="PresenceX - Connecting Student Presence With AI",
-    page_icon="🟣",
-    layout="wide",
+    page_icon="🟣"
 )
 
 def main():
