@@ -437,6 +437,7 @@ def login_teacher(user_name, password):
         return False
     teacher = teacher_login(user_name, password)
     if teacher:
+        st.session_state["login_type"] = "Teacher"
         st.session_state.teacher_role = "teacher"
         st.session_state.teacher_data = teacher
         st.session_state.is_logged_in = True
