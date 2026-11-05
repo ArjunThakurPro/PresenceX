@@ -238,7 +238,7 @@ def student():
                 time.sleep(1)
                 st.rerun()
 
-            if audio_data and not matched_student:
+            if not audio_data and not matched_student:
                 st.info(
                     "Face not recognized! You might be a new student, You need to register first or try again with a different voice sample."
                 )
